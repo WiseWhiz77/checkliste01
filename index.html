@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meine Routine Checkliste</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f9fafb;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+    .list-selector {
+      margin-bottom: 20px;
+    }
+    .task-list {
+      display: none;
+      width: 100%;
+      max-width: 400px;
+    }
+    .task-list.active {
+      display: block;
+    }
+    .task-button {
+      display: block;
+      width: 100%;
+      padding: 20px;
+      margin: 10px 0;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 12px;
+      background-color: #ef4444; /* rot */
+      color: white;
+      transition: background-color 0.3s;
+    }
+    .task-button.done {
+      background-color: #22c55e; /* grün */
+    }
+    .reset-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #3b82f6;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1>Routine Checkliste</h1>
+
+  <div class="list-selector">
+    <button onclick="showList('auto')">🚗 Auto</button>
+    <button onclick="showList('fahrrad')">🚴 Fahrrad</button>
+  </div>
+
+  <!-- Auto Liste -->
+  <div id="list-auto" class="task-list">
+    <button class="task-button">Fahrrad eingesteckt</button>
+    <button class="task-button">Ladegerät Wattzahl</button>
+    <button class="task-button">Flexmodule Neigung</button>
+    <button class="task-button">Westmodule</button>
+    <button class="task-button">Portemonaie / Parkmarke</button>
+    <button class="reset-btn" onclick="resetList('auto')">🔄 Zurücksetzen</button>
+  </div>
+
+  <!-- Fahrrad Liste -->
+  <div id="list-fahrrad" class="task-list">
+    <button class="task-button">Auto eingesteckt</button>
+    <button class="task-button">Ladegerät Wattzahl</button>
+    <button class="task-button">Flexmodule Neigung</button>
+    <button class="task-button">Westmodule</button>
+    <button class="task-button">Portemonaie / Fahrradschein</button>
+    <button class="task-button">Parkmarke</button>
+    <button class="reset-btn" onclick="resetList('fahrrad')">🔄 Zurücksetzen</button>
+  </div>
+
+  <script>
+    function showList(type) {
+      document.querySelectorAll('.task-list').forEach(list => list.classList.remove('active'));
+      document.getElementById('list-' + type).classList.add('active');
+    }
+
+    document.querySelectorAll('.task-button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.classList.toggle('done');
+      });
+    });
+
+    function resetList(type) {
+      document.querySelectorAll('#list-' + type + ' .task-button').forEach(btn => {
+        btn.classList.remove('done');
+      });
+    }
+  </script>
+</body>
+</html>
